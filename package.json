@@ -1,0 +1,17 @@
+{
+  "name": "cucumber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js ./feature"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "^9.0.1",
+    "@types/selenium-webdriver": "^4.1.13",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  }
+}
