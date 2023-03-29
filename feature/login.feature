@@ -1,8 +1,9 @@
-Feature: Check login Jira
+Feature: login Jira
 
+  @login @positive
   Scenario: Verify that user can login jira with email and password
     Given User is on login page
-    When User login with email as "<email>" and password as "<password>"
+    When User logins with email as "<email>" and password as "<password>"
     Then User should navigate to homepage
 
     Examples: 
