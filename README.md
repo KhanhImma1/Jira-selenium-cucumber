@@ -1,6 +1,6 @@
 # Jira-selenium-cucumber
 Test script for Jira web application
-Using selenium-webdriver, cucumber-js and typescript
+* Using selenium-webdriver, cucumber-js and typescript
 
 ## Precondition
 
