@@ -1,5 +1,4 @@
 import { Given, Then, When, setDefaultTimeout } from "@cucumber/cucumber";
-import { WebDriver } from "selenium-webdriver";
 import { NewProjectPage } from "../page/new_project.page"
 import { driver } from "../common/hook"
 import assert from "assert"
@@ -12,9 +11,32 @@ Given('User is on work page {string}', async (url) => {
     await driver.sleep(10 * 1000); // wait for page to load
 })
 
+// Scenario PRO-01
 When('User selects "Create Project" option from "Project" dropdown list on header bar', async () => {
     newProjectPage = new NewProjectPage(driver);
     await newProjectPage.newProject();
+})
+
+When('Users click on "Scrum" option', async () => {
+    await newProjectPage.newScrumProject1();
+})
+
+When('User clicks on "Use template" button', async () => {
+    await newProjectPage.newScrumProject2();
+})
+
+When('User clicks on "Select a team-managed project" button', async () => {
+    await newProjectPage.newScrumProject3();
+})
+
+When('User creates new project with project name as {string}', async (name) => {
+    await newProjectPage.newScrumProject4(name);
+})
+
+// Scenario PRO-02
+When('User creates new project with empty project name and empty project key', async () => {
+    newProjectPage = new NewProjectPage(driver);
+    await newProjectPage.emptyProject();
 })
 
 Then('"Software development" page title is displayed', async () => {
@@ -23,18 +45,10 @@ Then('"Software development" page title is displayed', async () => {
         "Wrong way 1");
 })
 
-When('Users click on "Scrum" option', async () => {
-    await newProjectPage.newScrumProject1();
-})
-
 Then('"Scrum" page title is displayed', async () => {
     assert.equal((await driver.findElement(newProjectPage.scrumTitle).getText()).toString(),
         "Scrum",
         "Wrong way 2")
-})
-
-When('User clicks on "Use template" button', async () => {
-    await newProjectPage.newScrumProject2();
 })
 
 Then('"Choose a project type" page title is displayed', async () => {
@@ -43,18 +57,10 @@ Then('"Choose a project type" page title is displayed', async () => {
         "Wrong way 3")
 })
 
-When('User clicks on "Select a team-managed project" button', async () => {
-    await newProjectPage.newScrumProject3();
-})
-
 Then('"Add project details" page title is displayed', async () => {
     assert.equal((await driver.findElement(newProjectPage.projectDetailsTitle).getText()).toString(),
         "Add project details",
         "Wrong way 4")
-})
-
-When('User creates new project with project name as {string}', async (name) => {
-    await newProjectPage.newScrumProject4(name);
 })
 
 Then('A popup containing message "Jira project successfully created" is displayed', async () => {
@@ -62,3 +68,13 @@ Then('A popup containing message "Jira project successfully created" is displaye
         "Jira project successfully created",
         "Wrong way 5")
 })
+
+Then('Error message is displayed', async () => {
+    assert.equal(await driver.findElement(newProjectPage.nameWarningMessage).isDisplayed() ,
+        true ,
+        "No show name warning message")
+    assert.equal(await driver.findElement(newProjectPage.keyWarningMessage).isDisplayed() ,
+        true ,
+        "No show key warning message")
+})
+

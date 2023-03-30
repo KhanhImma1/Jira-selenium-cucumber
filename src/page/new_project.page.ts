@@ -18,6 +18,8 @@ export class NewProjectPage {
     private keyTextBox = By.css('input[id*="key"]');
     private nextButton = By.xpath('//span[text()="Next"]');
     public successMessage = By.xpath('//span[text()="Jira project successfully created"]');
+    public nameWarningMessage = By.css('[class="km7ygq-3 jejLoQ"]');
+    public keyWarningMessage = By.css('[class="sc-1ao3zfo-13 hdAFoT"]');
     //span[text()="Go to project"]
 
     constructor(driver: WebDriver) {
@@ -52,5 +54,11 @@ export class NewProjectPage {
         await this.driver.sleep(2000); // wait for key textbox generate
         await this.component.clickElement(this.nextButton);
         await this.component.waitDisplay(this.successMessage);
+    }
+
+    public async emptyProject() {
+        await this.component.clickElement(this.nextButton);
+        await this.component.waitDisplay(this.nameWarningMessage);
+        await this.component.waitDisplay(this.keyWarningMessage);
     }
 }
