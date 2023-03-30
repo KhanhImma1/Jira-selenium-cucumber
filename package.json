@@ -12,6 +12,7 @@
     "@cucumber/cucumber": "^9.1.0",
     "@types/selenium-webdriver": "^4.1.13",
     "chai": "^4.3.7",
+    "package.json": "^2.0.1",
     "selenium-webdriver": "^4.8.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
