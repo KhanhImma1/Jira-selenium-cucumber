@@ -8,13 +8,13 @@ export class Component {
     }
 
     public async waitLocate(locator: By) {
-        await this.driver.wait(until.elementLocated(locator) , 10*1000);
+        await this.driver.wait(until.elementLocated(locator) , 20*1000);
     }
 
     public async waitDisplay(locator: By) {
         await this.waitLocate(locator);
         let element = this.driver.findElement(locator);
-        await this.driver.wait(until.elementIsVisible(element) , 10*1000)
+        await this.driver.wait(until.elementIsVisible(element) , 20*1000)
     }
 
     public async getTextReady(locator: By) {
