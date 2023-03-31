@@ -6,12 +6,12 @@ export class NewIssuePage {
     private component: Component;
 
     private createIssueGlobalButton = By.css('#createGlobalItem');
-    public createIssueTitle = By.css('[class="css-hz5ces"]');
+    public readonly createIssueTitle = By.css('[class="css-hz5ces"]');
     private issueTypeCombobox = By.css('[class="bjmwba-0 hApeTB"] [class="sc-1lie33m-0 bELLbo"]');
-    public storyOption = By.xpath('//div[text()="Story"]');
+    public readonly storyOption = By.xpath('//div[text()="Story"]');
     private summaryTextBox = By.css('input#summary-field');
     private createButton = By.css('button[type="submit"]');
-    public successPopup = By.css('[class="css-1s3ezfq"]');
+    public readonly successPopup = By.css('[class="css-1s3ezfq"]');
     
 
     constructor(driver: WebDriver) {

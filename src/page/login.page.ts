@@ -8,8 +8,8 @@ export class LoginPage {
     private emailTxtbox = By.css("#username");
     private loginBtn = By.css("#login-submit");
     private passwordTxtbox = By.css("#password");
-    public homepage = By.css('[data-testid="nav__profile-menu-trigger"]');
-    public passwordWarningMessage = By.css('[class="css-atlcf7"]');
+    public readonly homepage = By.css('[data-testid="nav__profile-menu-trigger"]');
+    public readonly passwordWarningMessage = By.css('[class="css-atlcf7"]');
 
     constructor(driver: WebDriver) {
         this.driver = driver;
@@ -22,7 +22,6 @@ export class LoginPage {
         await this.component.waitDisplay(this.passwordTxtbox);
         await this.component.setText(this.passwordTxtbox, password);
         await this.component.clickElement(this.loginBtn);
-        await this.driver.sleep(5*1000);
-        // await this.component.waitDisplay(this.homepage);
+        await this.driver.sleep(5*1000); // wait for page to load
     }
 }
