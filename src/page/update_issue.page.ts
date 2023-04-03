@@ -1,4 +1,4 @@
-import { Actions, By, Key, WebDriver } from "selenium-webdriver";
+import { By, Key, WebDriver } from "selenium-webdriver";
 import { Component } from "../common/component";
 
 export class UpdateIssuePage {
@@ -52,10 +52,36 @@ export class UpdateIssuePage {
         await this.component.waitDisplay(this.summaryTitle);
     }
 
-    public async attachFile(file_name: string) {
-        await this.component.waitDisplay(this.attachButton);
-        await this.component.clickElement(this.attachButton);
-        await this.driver.findElement(this.attachButton).sendKeys(file_name);
+    // public async attachFile(file_name: string) {
+    //     await this.component.waitDisplay(this.attachButton);
+    //     await this.component.clickElement(this.attachButton);
+    //     await this.driver.findElement(this.attachButton).sendKeys(file_name);
+    //     await this.driver.actions().sendKeys(Key.ENTER).perform();
+    // }
+
+    public async clickLinkIssueButton() {
+        await this.component.waitDisplay(this.linkIssueButton);
+        await this.component.clickElement(this.linkIssueButton);
+    }
+
+    public async searchForIssueToLink(linked_issue_key: string) {
+        await this.component.waitDisplay(this.searchForIssuesTextbox);
+        await this.driver.executeScript("arguments[0].scrollIntoView(true);" ,
+                                         this.driver.findElement(this.searchForIssuesTextbox));
+        await this.component.setText(this.searchForIssuesTextbox, linked_issue_key);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
+    }
+
+    public async selectLinkTypeOption(link_type: string) {
+        await this.component.waitDisplay(this.linkTypeTitle);
+        await this.component.clickElement(this.linkTypeTitle);
+        await this.component.waitDisplay(this.linkTypeTextbox);
+        await this.component.setText(this.linkTypeTextbox , link_type);
+        await this.driver.actions().sendKeys(Key.ENTER).perform();
+    }
+
+    public async clickLinkButton() {
+        await this.component.waitDisplay(this.linkButton);
+        await this.component.clickElement(this.linkButton);
     }
 }

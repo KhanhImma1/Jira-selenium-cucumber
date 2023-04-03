@@ -38,3 +38,18 @@ Feature: Update issue
     Examples: 
       | issue_key | file_name             |
       | NP2-1     | BugReport_Format.xlsx |
+
+  @linkissue
+  Scenario: Verify that user can add new linked issues
+    Given User is on work page "url"
+    When User selects "Go to Your Work page" option from "Your work" dropdown list
+    When User clicks on an issue with issue key as "<issue_key>" on issue list
+    When User clicks on "Link issue" button
+    When User enters valid issue key as "<linked_issue_key>" into "Search for issues" textbox
+    When User selects "Link type" option as "<link_type>" from "Link type" dropdown list
+    When User clicks on "Link" button
+    Then The linked issue with issue_key as "<linked_issue_key>" is displayed on link type group as "<link_type>"
+
+    Examples: 
+      | issue_key | linked_issue_key | link_type     |
+      | NP2-2     | NP2-5            | is blocked by |
