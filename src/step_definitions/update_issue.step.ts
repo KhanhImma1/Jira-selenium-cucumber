@@ -23,24 +23,8 @@ When(/^User replaces summary with \"([^\"]*)\" into summary textbox$/, async (ne
     await updateIssuePage.replaceSummary(new_summary);
 })
 
-When(/^User attachs a file with path as \"([^\"]*)\"$/, async (file_path) => {
-    await updateIssuePage.attachFile(file_path);
-})
-
-When(/^User clicks on "Link issue" button$/, async () => {
-    await updateIssuePage.clickLinkIssueButton();
-})
-
-When(/^User enters valid issue key as \"([^\"]*)\" into "Search for issues" textbox$/, async (linked_issue_key) => {
-    await updateIssuePage.searchForIssueToLink(linked_issue_key);
-})
-
-When(/^User selects "Link type" option as \"([^\"]*)\" from "Link type" dropdown list$/, async (link_type) => {
-    await updateIssuePage.selectLinkTypeOption(link_type);
-})
-
-When(/^User clicks on "Link" button$/, async () => {
-    await updateIssuePage.clickLinkButton();
+When(/^User attachs a file with file name as \"([^\"]*)\"$/, async (file_name) => {
+    await updateIssuePage.attachFile(file_name);
 })
 
 Then(/^User should navigate to \"([^\"]*)\" issue's detail page$/, async (issueKey) => {
@@ -63,23 +47,8 @@ Then(/^The name \"([^\"]*)\" of file attached is displayed on attachments field 
     component = new Component(driver);
     await component.waitDisplay(attachedfile);
     console.log((await driver.findElement(attachedfile).getAttribute("data-test-media-name")).toString());
-    assert.match((await driver.findElement(attachedfile).getAttribute("data-test-media-name")).toString() ,
-        /file_name/ ,
+    assert.equal((await driver.findElement(attachedfile).getAttribute("data-test-media-name")).toString() ,
+        file_name ,
         "It's not file attached");
 })
 
-Then(/^The linked issue with issue_key as \"([^\"]*)\" is displayed on link type group as \"([^\"]*)\"$/ ,
-    async (linked_issue_key , link_type) => {
-    let linkTypeGroupLabel = By.xpath(updateIssuePage.linkTypeGroupLabelSelector.replace("{link_type}" , link_type));
-    let linkedIssueKeyInGroup = By.xpath(updateIssuePage.linkedIssueKeyInGroupSelector.replace("{linked_issue_key}" , linked_issue_key)
-                                                                                        .replace("{link_type}" , link_type));
-    component = new Component(driver);
-    await component.waitDisplay(linkTypeGroupLabel);
-    await component.waitDisplay(linkedIssueKeyInGroup);
-    assert.equal((await driver.findElement(linkTypeGroupLabel).getText()).toString() ,
-        link_type ,
-        "It's not link type added");
-    assert.equal((await driver.findElement(linkedIssueKeyInGroup).getText()).toString() ,
-        linked_issue_key ,
-        "It's not linked issue key added");
-})
