@@ -23,6 +23,10 @@ When(/^User replaces summary with \"([^\"]*)\" into summary textbox$/, async (ne
     await updateIssuePage.replaceSummary(new_summary);
 })
 
+When(/^User attachs a file with path as \"([^\"]*)\"$/, async (file_path) => {
+    await updateIssuePage.attachFile(file_path);
+})
+
 Then(/^User should navigate to \"([^\"]*)\" issue's detail page$/, async (issueKey) => {
     component = new Component(driver);
     let issueTitle = By.xpath(updateIssuePage.issueKeyTitleSelector.replace("{1}", issueKey));
@@ -36,4 +40,14 @@ Then(/^New summary \"([^\"]*)\" is displayed on summary title$/, async (new_summ
     assert.equal((await driver.findElement(updateIssuePage.summaryTitle).getText()).toString() ,
         new_summary ,
         "Incorrect new summary title");
+})
+
+Then(/^The name \"([^\"]*)\" of file attached is displayed on attachments field of issue detail page$/, async (file_name) => {
+    let attachedfile = By.css(updateIssuePage.attachedfileSelector.replace("{2}" , file_name));
+    component = new Component(driver);
+    await component.waitDisplay(attachedfile);
+    console.log((await driver.findElement(attachedfile).getAttribute("data-test-media-name")).toString());
+    assert.match((await driver.findElement(attachedfile).getAttribute("data-test-media-name")).toString() ,
+        /file_name/ ,
+        "It's not file attached");
 })

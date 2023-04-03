@@ -25,4 +25,16 @@ Feature: Update issue
 
     Examples: 
       | issue_key | new_summary        |
-      | NP2-1     | Replaced summary 1 |
+      | NP2-2     | Replaced summary 2 |
+
+  @attachfile
+  Scenario: Verify that user can attach file in issue detail page
+    Given User is on work page "url"
+    When User selects "Go to Your Work page" option from "Your work" dropdown list
+    When User clicks on an issue with issue key as "<issue_key>" on issue list
+    When User attachs a file with path as "<file_path>"
+    Then The name "<file_name>" of file attached is displayed on attachments field of issue detail page
+
+    Examples: 
+      | issue_key | file_path                                                         | file_name        |
+      | NP2-1     | C:\\Users\\Admijn\\Desktop\\CV Tester 2023\\BugReport_Format.xlsx | BugReport_Format |
