@@ -9,7 +9,6 @@ let component: Component;
 
 setDefaultTimeout(50 * 1000);
 
-// Scenario ISS-01
 When(/^User clicks on "Create" button on header bar$/, async () => {
     newIssuePage = new NewIssuePage(driver);
     await newIssuePage.openCreateIssuePopup();
@@ -37,7 +36,7 @@ Then(/^"Create issue" popup is opened$/, async () => {
 
 Then(/^"Story" option is displayed on "Issue type" combobox$/, async () => {
     component = new Component(driver);
-    await component.waitDisplay(newIssuePage.storyOption);
+    await component.waitForDisplay(newIssuePage.storyOption);
     assert.equal(await driver.findElement(newIssuePage.storyOption).isDisplayed(),
                         true ,
                         "No show Story issue type");
@@ -45,10 +44,8 @@ Then(/^"Story" option is displayed on "Issue type" combobox$/, async () => {
 
 Then(/^A popup with success message "You've created" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitDisplay(newIssuePage.successPopup);
+    await component.waitForDisplay(newIssuePage.successPopup);
     assert.equal(await driver.findElement(newIssuePage.successPopup).isDisplayed(),
                         true ,
                         "No show success popup");
 })
-
-// Scenario ISS-02

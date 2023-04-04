@@ -28,28 +28,28 @@ export class UpdateIssuePage {
     }
 
     public async clickGoToYourWorkOption() {
-        await this.component.waitDisplay(this.yourWorkDroplist);
+        await this.component.waitForDisplay(this.yourWorkDroplist);
         await this.component.clickElement(this.yourWorkDroplist);
-        await this.component.waitDisplay(this.goToYourWorkOption);
+        await this.component.waitForDisplay(this.goToYourWorkOption);
         await this.component.clickElement(this.goToYourWorkOption);
     }
 
     public async clickIssueItem(issueKey: string) {
         let issueItem = By.xpath(this.issueItemSelector.replace("{issue_key}", issueKey));
-        await this.component.waitDisplay(issueItem);
+        await this.component.waitForDisplay(issueItem);
         // await this.driver.executeScript("arguments[0].scrollIntoView(true);", this.driver.findElement(issueItem));
         await this.component.clickElement(issueItem);
     }
 
     public async replaceSummary(new_summary: string) {
-        await this.component.waitDisplay(this.summaryTitle);
+        await this.component.waitForDisplay(this.summaryTitle);
         await this.component.clickElement(this.summaryTitle);
-        await this.component.waitDisplay(this.summaryTextBox);
+        await this.component.waitForDisplay(this.summaryTextBox);
         await this.driver.actions().keyDown(Key.CONTROL).sendKeys("a").keyUp(Key.CONTROL).perform();
         await this.driver.actions().sendKeys(Key.DELETE).perform();
         await this.component.setText(this.summaryTextBox , new_summary);
         await this.component.clickElement(this.confirmSummaryButton);
-        await this.component.waitDisplay(this.summaryTitle);
+        await this.component.waitForDisplay(this.summaryTitle);
     }
 
     // public async attachFile(file_name: string) {
@@ -60,28 +60,27 @@ export class UpdateIssuePage {
     // }
 
     public async clickLinkIssueButton() {
-        await this.component.waitDisplay(this.linkIssueButton);
+        await this.component.waitForDisplay(this.linkIssueButton);
         await this.component.clickElement(this.linkIssueButton);
     }
 
     public async searchForIssueToLink(linked_issue_key: string) {
-        await this.component.waitDisplay(this.searchForIssuesTextbox);
-        await this.driver.executeScript("arguments[0].scrollIntoView(true);" ,
-                                         this.driver.findElement(this.searchForIssuesTextbox));
+        await this.component.waitForDisplay(this.searchForIssuesTextbox);
+        await this.component.scrollIntoElement(this.searchForIssuesTextbox);
         await this.component.setText(this.searchForIssuesTextbox, linked_issue_key);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
     }
 
     public async selectLinkTypeOption(link_type: string) {
-        await this.component.waitDisplay(this.linkTypeTitle);
+        await this.component.waitForDisplay(this.linkTypeTitle);
         await this.component.clickElement(this.linkTypeTitle);
-        await this.component.waitDisplay(this.linkTypeTextbox);
+        await this.component.waitForDisplay(this.linkTypeTextbox);
         await this.component.setText(this.linkTypeTextbox , link_type);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
     }
 
     public async clickLinkButton() {
-        await this.component.waitDisplay(this.linkButton);
+        await this.component.waitForDisplay(this.linkButton);
         await this.component.clickElement(this.linkButton);
     }
 }

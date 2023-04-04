@@ -20,28 +20,28 @@ export class NewIssuePage {
     }
 
     public async openCreateIssuePopup() {
-        await this.component.waitDisplay(this.createIssueGlobalButton);
+        await this.component.waitForDisplay(this.createIssueGlobalButton);
         await this.component.clickElement(this.createIssueGlobalButton);
-        await this.component.waitDisplay(this.createIssueTitle);
+        await this.component.waitForDisplay(this.createIssueTitle);
     }
 
     public async selectStoryOption() {
-        await this.component.waitDisplay(this.issueTypeCombobox);
+        await this.component.waitForDisplay(this.issueTypeCombobox);
         if ((await this.driver.findElement(this.storyOption).isDisplayed()) == false) {
             await this.component.clickElement(this.issueTypeCombobox);
-            await this.component.waitDisplay(this.storyOption);
+            await this.component.waitForDisplay(this.storyOption);
             await this.component.clickElement(this.storyOption)
         }
     }
     
     public async inputSummary(value: string) {
-        await this.component.waitDisplay(this.summaryTextBox);
+        await this.component.waitForDisplay(this.summaryTextBox);
         await this.component.clickElement(this.summaryTextBox);
         await this.component.setText(this.summaryTextBox, value);
     }
 
     public async submitIssue() {
-        await this.component.waitDisplay(this.createButton);
+        await this.component.waitForDisplay(this.createButton);
         await this.component.clickElement(this.createButton);
     }
 }

@@ -29,23 +29,23 @@ export class NewProjectPage {
     public async clickCreateProjectOption() {
         await this.component.clickElement(this.projectDropdownList);
         await this.component.clickElement(this.creatProjectOption);
-        await this.component.waitDisplay(this.softwareDevelopmentTitle);
+        await this.component.waitForDisplay(this.softwareDevelopmentTitle);
 
     }
 
     public async clickScrumButton() {
         await this.component.clickElement(this.scrumButton);
-        await this.component.waitDisplay(this.scrumTitle);
+        await this.component.waitForDisplay(this.scrumTitle);
     }
 
     public async clickUseTemplateButton() {
         await this.component.clickElement(this.useTemplateButton);
-        await this.component.waitDisplay(this.projectTypeTitle);
+        await this.component.waitForDisplay(this.projectTypeTitle);
     }
 
     public async clickTeamManagedButton() {
         await this.component.clickElement(this.selectTeamButton);
-        await this.component.waitDisplay(this.projectDetailsTitle);
+        await this.component.waitForDisplay(this.projectDetailsTitle);
     }
 
     public async submitProject(value: string) {

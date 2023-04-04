@@ -66,7 +66,7 @@ Then(/^"Add project details" page title is displayed$/, async () => {
 
 Then(/^A popup containing message "Jira project successfully created" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitDisplay(newProjectPage.successMessage);
+    await component.waitForDisplay(newProjectPage.successMessage);
     assert.equal((await driver.findElement(newProjectPage.successMessage).getText()).toString(),
         "Jira project successfully created",
         "It's not Jira project successfully created popup")
@@ -74,14 +74,14 @@ Then(/^A popup containing message "Jira project successfully created" is display
 
 Then(/^Warning message "Project must have a name" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitDisplay(newProjectPage.nameWarningMessage);
+    await component.waitForDisplay(newProjectPage.nameWarningMessage);
     assert.equal(await driver.findElement(newProjectPage.nameWarningMessage).isDisplayed() ,
         true ,
         "No show name warning message")
 })
 
 Then(/^Warning message "Project must have a key" is displayed$/, async () => {
-    await component.waitDisplay(newProjectPage.keyWarningMessage);
+    await component.waitForDisplay(newProjectPage.keyWarningMessage);
     assert.equal(await driver.findElement(newProjectPage.keyWarningMessage).isDisplayed() ,
         true ,
         "No show key warning message")
