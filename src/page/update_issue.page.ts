@@ -1,11 +1,11 @@
-import { Actions, By, Key, WebDriver } from "selenium-webdriver";
+import { By, Key, WebDriver } from "selenium-webdriver";
 import { Component } from "../common/component";
 
 export class UpdateIssuePage {
     private driver: WebDriver;
     private component: Component;
 
-    private yourWorkDroplist = By.xpath('//button/span[text()="Your work"]');
+    public readonly yourWorkDroplist = By.xpath('//button/span[text()="Your work"]');
     private goToYourWorkOption = By.xpath('//span[text()="Go to Your Work page"]');
     public readonly summaryTitle = By.css('[data-testid*="summary.heading"]');
     private summaryTextBox = By.xpath('//h1[contains(@data-test-id,"summary")]//textarea');
@@ -16,7 +16,7 @@ export class UpdateIssuePage {
     private linkTypeTitle = By.css('[data-test-id*="issue-links.add.select"]');
     private linkTypeTextbox = By.css('#react-select-2-input');
     private linkButton = By.css('[data-test-id*="link-button"]');
-    private issueItemSelector = '//small/span[text()="{issue_key}"]';
+    private issueKeyItemSelector = '//small/span[text()="{issue_key}"]';
     public readonly issueKeyTitleSelector = '//div[@id="jira-issue-header"]//span[text()="{issue_key}"]';
     public readonly attachedfileSelector = '[data-test-media-name*="{file_name}"]';
     public readonly linkTypeGroupLabelSelector = '//div[contains(@data-test-id,"links.group-container")]//span[text()="{link_type}"]';
@@ -28,34 +28,51 @@ export class UpdateIssuePage {
     }
 
     public async clickGoToYourWorkOption() {
-        await this.component.waitDisplay(this.yourWorkDroplist);
+        await this.component.waitForDisplayed(this.yourWorkDroplist);
         await this.component.clickElement(this.yourWorkDroplist);
-        await this.component.waitDisplay(this.goToYourWorkOption);
+        await this.component.waitForDisplayed(this.goToYourWorkOption);
         await this.component.clickElement(this.goToYourWorkOption);
     }
 
-    public async clickIssueItem(issueKey: string) {
-        let issueItem = By.xpath(this.issueItemSelector.replace("{issue_key}", issueKey));
-        await this.component.waitDisplay(issueItem);
-        // await this.driver.executeScript("arguments[0].scrollIntoView(true);", this.driver.findElement(issueItem));
-        await this.component.clickElement(issueItem);
+    public async clickIssueKeyItem(issueKey: string) {
+        let issueKeyItem = By.xpath(this.issueKeyItemSelector.replace("{issue_key}", issueKey));
+        await this.component.waitForDisplayed(issueKeyItem);
+        await this.component.clickElement(issueKeyItem);
     }
 
-    public async replaceSummary(new_summary: string) {
-        await this.component.waitDisplay(this.summaryTitle);
+    public async replaceIssueSummary(new_summary: string) {
+        await this.component.waitForDisplayed(this.summaryTitle);
         await this.component.clickElement(this.summaryTitle);
-        await this.component.waitDisplay(this.summaryTextBox);
+        await this.component.waitForDisplayed(this.summaryTextBox);
         await this.driver.actions().keyDown(Key.CONTROL).sendKeys("a").keyUp(Key.CONTROL).perform();
         await this.driver.actions().sendKeys(Key.DELETE).perform();
         await this.component.setText(this.summaryTextBox , new_summary);
         await this.component.clickElement(this.confirmSummaryButton);
-        await this.component.waitDisplay(this.summaryTitle);
+        await this.component.waitForDisplayed(this.summaryTitle);
     }
 
-    public async attachFile(file_name: string) {
-        await this.component.waitDisplay(this.attachButton);
-        await this.component.clickElement(this.attachButton);
-        await this.driver.findElement(this.attachButton).sendKeys(file_name);
+    public async clickLinkIssueButton() {
+        await this.component.waitForDisplayed(this.linkIssueButton);
+        await this.component.clickElement(this.linkIssueButton);
+    }
+
+    public async searchForIssueToLink(linked_issue_key: string) {
+        await this.component.waitForDisplayed(this.searchForIssuesTextbox);
+        await this.component.scrollIntoElementByJavaScript(this.searchForIssuesTextbox);
+        await this.component.setText(this.searchForIssuesTextbox, linked_issue_key);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
+    }
+
+    public async selectLinkTypeOption(link_type: string) {
+        await this.component.waitForDisplayed(this.linkTypeTitle);
+        await this.component.clickElement(this.linkTypeTitle);
+        await this.component.waitForDisplayed(this.linkTypeTextbox);
+        await this.component.setText(this.linkTypeTextbox , link_type);
+        await this.driver.actions().sendKeys(Key.ENTER).perform();
+    }
+
+    public async clickLinkButton() {
+        await this.component.waitForDisplayed(this.linkButton);
+        await this.component.clickElement(this.linkButton);
     }
 }

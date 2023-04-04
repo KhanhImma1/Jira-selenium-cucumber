@@ -19,9 +19,8 @@ export class LoginPage {
     public async login(email: string, password: string) {
         await this.component.setText(this.emailTxtbox, email);
         await this.component.clickElement(this.loginBtn);
-        await this.component.waitDisplay(this.passwordTxtbox);
+        await this.component.waitForDisplayed(this.passwordTxtbox);
         await this.component.setText(this.passwordTxtbox, password);
         await this.component.clickElement(this.loginBtn);
-        await this.driver.sleep(5*1000); // wait for page to load
     }
 }

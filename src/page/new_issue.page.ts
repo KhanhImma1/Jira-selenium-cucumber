@@ -20,28 +20,28 @@ export class NewIssuePage {
     }
 
     public async openCreateIssuePopup() {
-        await this.component.waitDisplay(this.createIssueGlobalButton);
+        await this.component.waitForDisplayed(this.createIssueGlobalButton);
         await this.component.clickElement(this.createIssueGlobalButton);
-        await this.component.waitDisplay(this.createIssueTitle);
+        await this.component.waitForDisplayed(this.createIssueTitle);
     }
 
     public async selectStoryOption() {
-        await this.component.waitDisplay(this.issueTypeCombobox);
+        await this.component.waitForDisplayed(this.issueTypeCombobox);
         if ((await this.driver.findElement(this.storyOption).isDisplayed()) == false) {
             await this.component.clickElement(this.issueTypeCombobox);
-            await this.component.waitDisplay(this.storyOption);
+            await this.component.waitForDisplayed(this.storyOption);
             await this.component.clickElement(this.storyOption)
         }
     }
     
-    public async inputSummary(value: string) {
-        await this.component.waitDisplay(this.summaryTextBox);
+    public async inputIssueSummary(value: string) {
+        await this.component.waitForDisplayed(this.summaryTextBox);
         await this.component.clickElement(this.summaryTextBox);
         await this.component.setText(this.summaryTextBox, value);
     }
 
     public async submitIssue() {
-        await this.component.waitDisplay(this.createButton);
+        await this.component.waitForDisplayed(this.createButton);
         await this.component.clickElement(this.createButton);
     }
 }
