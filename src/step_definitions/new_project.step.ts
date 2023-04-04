@@ -3,14 +3,17 @@ import { NewProjectPage } from "../page/new_project.page"
 import { driver } from "../common/hook"
 import assert from "assert"
 import { Component } from "../common/component";
+import { UpdateIssuePage } from "../page/update_issue.page";
 
 let newProjectPage: NewProjectPage;
 let component: Component;
+let homepage: UpdateIssuePage
 setDefaultTimeout(50 * 1000);
 
 Given(/^User is on work page \"([^\"]*)\"$/, async (url) => {
     await driver.navigate().to("https://htk-entry-auto.atlassian.net/");
-    await driver.sleep(10 * 1000); // wait for page to load
+    homepage = new UpdateIssuePage(driver);
+    await component.waitForDisplayed(homepage.yourWorkDroplist);
 })
 
 When(/^User selects "Create Project" option from "Project" dropdown list on header bar$/, async () => {
@@ -43,47 +46,47 @@ When(/^User creates new project with empty project name and empty project key$/,
 Then(/^"Software development" page title is displayed$/, async () => {
     assert.equal((await driver.findElement(newProjectPage.softwareDevelopmentTitle).getText()).toString(),
         "Software development",
-        "It's not Software development page");
+        "Software development page is not displayed");
 })
 
 Then(/^"Scrum" page title is displayed$/, async () => {
     assert.equal((await driver.findElement(newProjectPage.scrumTitle).getText()).toString(),
         "Scrum",
-        "It's not Scrum page")
+        "Scrum page is not displayed")
 })
 
 Then(/^"Choose a project type" page title is displayed$/, async () => {
     assert.equal((await driver.findElement(newProjectPage.projectTypeTitle).getText()).toString(),
         "Choose a project type",
-        "It's not Choose a project type page")
+        "Choose a project type page is not displayed")
 })
 
 Then(/^"Add project details" page title is displayed$/, async () => {
     assert.equal((await driver.findElement(newProjectPage.projectDetailsTitle).getText()).toString(),
         "Add project details",
-        "It's not Add project details page")
+        "Add project details page is not displayed")
 })
 
 Then(/^A popup containing message "Jira project successfully created" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitForDisplay(newProjectPage.successMessage);
+    await component.waitForDisplayed(newProjectPage.successMessage);
     assert.equal((await driver.findElement(newProjectPage.successMessage).getText()).toString(),
         "Jira project successfully created",
-        "It's not Jira project successfully created popup")
+        "Jira project successfully created popup is not displayed")
 })
 
 Then(/^Warning message "Project must have a name" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitForDisplay(newProjectPage.nameWarningMessage);
+    await component.waitForDisplayed(newProjectPage.nameWarningMessage);
     assert.equal(await driver.findElement(newProjectPage.nameWarningMessage).isDisplayed() ,
         true ,
-        "No show name warning message")
+        'Warning message "Project must have a name" is not displayed')
 })
 
 Then(/^Warning message "Project must have a key" is displayed$/, async () => {
-    await component.waitForDisplay(newProjectPage.keyWarningMessage);
+    await component.waitForDisplayed(newProjectPage.keyWarningMessage);
     assert.equal(await driver.findElement(newProjectPage.keyWarningMessage).isDisplayed() ,
         true ,
-        "No show key warning message")
+        'Warning message "Project must have a key" is not displayed')
 })
 

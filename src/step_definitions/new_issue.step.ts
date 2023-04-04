@@ -15,7 +15,7 @@ When(/^User clicks on "Create" button on header bar$/, async () => {
 })
 
 When(/^User enters summary data as \"([^\"]*)\"$/, async (summary) => {
-    await newIssuePage.inputSummary(summary);
+    await newIssuePage.inputIssueSummary(summary);
 })
 
 When(/^User selects "Story" option from "Issue type" dropdown list$/, async () => {
@@ -29,23 +29,23 @@ When(/^User clicks on "Create" button$/, async () => {
 
 Then(/^"Create issue" popup is opened$/, async () => {
     assert.equal((await driver.findElement(newIssuePage.createIssueTitle).getText()).toString(),
-        "Create issue",
-        "No show Create issue popup");
+                                            "Create issue",
+                                            "Create issue popup is not displayed");
 })
 
 
 Then(/^"Story" option is displayed on "Issue type" combobox$/, async () => {
     component = new Component(driver);
-    await component.waitForDisplay(newIssuePage.storyOption);
+    await component.waitForDisplayed(newIssuePage.storyOption);
     assert.equal(await driver.findElement(newIssuePage.storyOption).isDisplayed(),
                         true ,
-                        "No show Story issue type");
+                        "Story option is not displayed on Issue type combobox");
 })
 
 Then(/^A popup with success message "You've created" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitForDisplay(newIssuePage.successPopup);
+    await component.waitForDisplayed(newIssuePage.successPopup);
     assert.equal(await driver.findElement(newIssuePage.successPopup).isDisplayed(),
                         true ,
-                        "No show success popup");
+                        "Success popup is not displayed");
 })
