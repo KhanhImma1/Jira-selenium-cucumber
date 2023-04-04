@@ -38,14 +38,14 @@ Then(/^"Story" option is displayed on "Issue type" combobox$/, async () => {
     component = new Component(driver);
     await component.waitForDisplayed(newIssuePage.storyOption);
     assert.equal(await driver.findElement(newIssuePage.storyOption).isDisplayed(),
-                        true ,
-                        "Story option is not displayed on Issue type combobox");
+                                          true ,
+                                          "Story option is not displayed on Issue type combobox");
 })
 
 Then(/^A popup with success message "You've created" is displayed$/, async () => {
     component = new Component(driver);
     await component.waitForDisplayed(newIssuePage.successPopup);
     assert.equal(await driver.findElement(newIssuePage.successPopup).isDisplayed(),
-                        true ,
-                        "Success popup is not displayed");
+                                            true ,
+                                            "Success popup is not displayed");
 })

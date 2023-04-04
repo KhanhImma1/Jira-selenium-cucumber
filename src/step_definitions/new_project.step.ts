@@ -72,7 +72,7 @@ Then(/^A popup containing message "Jira project successfully created" is display
     await component.waitForDisplayed(newProjectPage.successMessage);
     assert.equal((await driver.findElement(newProjectPage.successMessage).getText()).toString(),
         "Jira project successfully created",
-        "Jira project successfully created popup is not displayed")
+        '"Jira project successfully created" popup is not displayed')
 })
 
 Then(/^Warning message "Project must have a name" is displayed$/, async () => {
