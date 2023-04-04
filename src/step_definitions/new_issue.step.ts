@@ -30,7 +30,7 @@ When(/^User clicks on "Create" button$/, async () => {
 Then(/^"Create issue" popup is opened$/, async () => {
     assert.equal((await driver.findElement(newIssuePage.createIssueTitle).getText()).toString(),
                                             "Create issue",
-                                            "Create issue popup is not displayed");
+                                            "The Create issue popup is not displayed");
 })
 
 
@@ -39,7 +39,7 @@ Then(/^"Story" option is displayed on "Issue type" combobox$/, async () => {
     await component.waitForDisplayed(newIssuePage.storyOption);
     assert.equal(await driver.findElement(newIssuePage.storyOption).isDisplayed(),
                                           true ,
-                                          "Story option is not displayed on Issue type combobox");
+                                          "The Story option is not displayed on Issue type combobox");
 })
 
 Then(/^A popup with success message "You've created" is displayed$/, async () => {
@@ -47,5 +47,5 @@ Then(/^A popup with success message "You've created" is displayed$/, async () =>
     await component.waitForDisplayed(newIssuePage.successPopup);
     assert.equal(await driver.findElement(newIssuePage.successPopup).isDisplayed(),
                                             true ,
-                                            "Success popup is not displayed");
+                                            "The Success popup is not displayed");
 })

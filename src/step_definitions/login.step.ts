@@ -30,5 +30,5 @@ Then(/^Warning message "Incorrect email address or password" is displayed$/, asy
     await component.waitForDisplayed(loginPage.passwordWarningMessage);
     assert.equal(await driver.findElement(loginPage.passwordWarningMessage).isDisplayed() , 
                         true ,
-                        'Warning message "Incorrect email address or password" is not displayed');
+                        'The warning message "Incorrect email address or password" is not displayed');
 })
