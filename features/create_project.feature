@@ -6,7 +6,7 @@ Feature: Create new project
 
   @project @positive
   Scenario: [PRO-01] Verify that user can create a new "Scum" template project
-    Given User is on work page "url"
+    Given User is on work page
     When User selects "Create Project" option from "Project" dropdown list on header bar
     Then "Software development" page title is displayed
     When Users click on "Scrum" option
@@ -24,7 +24,7 @@ Feature: Create new project
 
   @project @negative
   Scenario: [PRO-01] Verify that user cannot create a new "Scrum" template project with empty project name and empty project key
-    Given User is on work page "url"
+    Given User is on work page
     When User selects "Create Project" option from "Project" dropdown list on header bar
     Then "Software development" page title is displayed
     When Users click on "Scrum" option

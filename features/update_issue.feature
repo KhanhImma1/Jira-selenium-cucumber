@@ -6,7 +6,7 @@ Feature: Update issue
 
   @viewissue
   Scenario: [ISS-03] Verify that user can view an issue's detail
-    Given User is on work page "url"
+    Given User is on work page
     When User selects "Go to Your Work page" option from "Your work" dropdown list
     When User clicks on an issue with issue key as "<issue_key>" on issue list
     Then User should navigate to "<issue_key>" issue's detail page
@@ -17,7 +17,7 @@ Feature: Update issue
 
   @replacesummary
   Scenario: [ISS-04] Verify that user can replace issue's summary
-    Given User is on work page "url"
+    Given User is on work page
     When User selects "Go to Your Work page" option from "Your work" dropdown list
     When User clicks on an issue with issue key as "<issue_key>" on issue list
     When User replaces summary with "<new_summary>" into summary textbox
@@ -29,7 +29,7 @@ Feature: Update issue
 
   @attachfile
   Scenario: Verify that user can attach file in issue detail page
-    Given User is on work page "url"
+    Given User is on work page
     When User selects "Go to Your Work page" option from "Your work" dropdown list
     When User clicks on an issue with issue key as "<issue_key>" on issue list
     When User attachs a file with file name as "<file_name>"
@@ -41,7 +41,7 @@ Feature: Update issue
 
   @linkissue
   Scenario: Verify that user can add new linked issues
-    Given User is on work page "url"
+    Given User is on work page
     When User selects "Go to Your Work page" option from "Your work" dropdown list
     When User clicks on an issue with issue key as "<issue_key>" on issue list
     When User clicks on "Link issue" button

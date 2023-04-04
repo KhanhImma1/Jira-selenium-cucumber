@@ -22,5 +22,6 @@ export class LoginPage {
         await this.component.waitForDisplayed(this.passwordTxtbox);
         await this.component.setText(this.passwordTxtbox, password);
         await this.component.clickElement(this.loginBtn);
+        await this.driver.sleep(5000);
     }
 }

@@ -34,6 +34,6 @@ export class Component {
 
     public async scrollIntoElementByJavaScript(locator: By) {
         await this.driver.executeScript("arguments[0].scrollIntoView(true);" , 
-                                        this.driver.findElement(locator));
+                                       await this.driver.findElement(locator));
     }
 }

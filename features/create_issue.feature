@@ -6,7 +6,7 @@ Feature: Create new isssue
 
   @issue @positive
   Scenario: [ISS-01] Verify that user can create a new "Story" issue
-    Given User is on work page "url"
+    Given User is on work page
     When User clicks on "Create" button on header bar
     Then "Create issue" popup is opened
     When User enters summary data as "<summary>"

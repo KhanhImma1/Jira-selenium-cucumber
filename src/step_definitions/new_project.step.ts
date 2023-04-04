@@ -10,9 +10,10 @@ let component: Component;
 let homePage: UpdateIssuePage;
 setDefaultTimeout(50 * 1000);
 
-Given(/^User is on work page \"([^\"]*)\"$/, async () => {
+Given(/^User is on work page$/, async () => {
     await driver.navigate().to("https://htk-entry-auto.atlassian.net/");
     homePage = new UpdateIssuePage(driver);
+    component = new Component(driver);
     await component.waitForDisplayed(homePage.yourWorkDroplist);
 })
 
