@@ -1,5 +1,6 @@
 import { By, WebDriver } from "selenium-webdriver";
 import { Component } from "../common/component";
+import { TIMEFORUNITGENERATED } from "../common/hook"
 
 export class NewProjectPage {
     private driver: WebDriver;
@@ -30,7 +31,6 @@ export class NewProjectPage {
         await this.component.clickElement(this.projectDropdownList);
         await this.component.clickElement(this.creatProjectOption);
         await this.component.waitForDisplayed(this.softwareDevelopmentTitle);
-
     }
 
     public async clickScrumButton() {
@@ -50,7 +50,7 @@ export class NewProjectPage {
 
     public async submitProject(value: string) {
         await this.component.setText(this.nameTextBox, value);
-        await this.driver.sleep(2000); // wait for key textbox generated
+        await this.driver.sleep(TIMEFORUNITGENERATED); // wait for key textbox generated
         await this.component.clickElement(this.nextButton);
     }
 }

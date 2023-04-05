@@ -1,6 +1,6 @@
 Feature: login Jira
 
-  @login @positive
+  @login @positive @test
   Scenario: [LOG-01] Verify that user can login jira with email and password
     Given User is on login page
     When User logins with email as "khanh.t.hoang@evizi.com" and password as "khanh123"

@@ -1,5 +1,6 @@
 import { By, Key, WebDriver, WebElement } from "selenium-webdriver";
 import { Component } from "../common/component";
+import { TIMEFORUNITGENERATED } from "../common/hook"
 
 export class UpdateProjectPage {
     private driver: WebDriver;
@@ -53,7 +54,7 @@ export class UpdateProjectPage {
         await this.component.waitForDisplayed(this.createSprintButton);
         await this.component.scrollIntoElementByJavaScript(this.createSprintButton);
         await this.component.clickElement(this.createSprintButton);
-        await this.driver.sleep(2000); // wait for new sprint tag generated
+        await this.driver.sleep(TIMEFORUNITGENERATED); // wait for new sprint tag generated
     }
 
     public async createNewIssueOnNewSprint(issue_summary: string) {

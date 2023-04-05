@@ -3,11 +3,10 @@ import { NewIssuePage } from "../page/new_issue.page";
 import { driver } from "../common/hook"
 import assert from "assert"
 import { Component } from "../common/component";
+import { By } from "selenium-webdriver";
 
 let newIssuePage: NewIssuePage;
 let component: Component;
-
-setDefaultTimeout(50 * 1000);
 
 When(/^User clicks on "Create" button on header bar$/, async () => {
     newIssuePage = new NewIssuePage(driver);
@@ -24,7 +23,11 @@ When(/^User selects "Story" option from "Issue type" dropdown list$/, async () =
 
 When(/^User clicks on "Create" button$/, async () => {
     await newIssuePage.submitIssue();
+})
 
+When('User selects issue type option as {string} from Issue type dropdown list', async (issue_type) => {
+    await newIssuePage.selectIssueTypeOption(issue_type);
+    console.log("checked");
 })
 
 Then(/^"Create issue" popup is opened$/, async () => {
@@ -48,4 +51,14 @@ Then(/^A popup with success message "You've created" is displayed$/, async () =>
     assert.equal(await driver.findElement(newIssuePage.successPopup).isDisplayed(),
                                             true ,
                                             "The Success popup is not displayed");
+})
+
+Then('{string} option is displayed on Issue type combobox', async (issue_type) => {
+    component = new Component(driver);
+    let issueTypeOption = By.xpath(newIssuePage.issueTypeOptionSelector.replace("{issue_type}" , issue_type));
+    await component.waitForDisplayed(issueTypeOption);
+    assert.equal((await driver.findElement(issueTypeOption).getText()).toString() ,
+                                          issue_type ,
+                                          "The selected option is not displayed on Issue type combobox");
+                                          console.log("checked");
 })

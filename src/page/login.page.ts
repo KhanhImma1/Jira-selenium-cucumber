@@ -1,5 +1,6 @@
 import { WebDriver, By } from "selenium-webdriver";
 import { Component } from "../common/component";
+import { TIMEFORPAGELOADED } from "../common/hook"
 
 export class LoginPage {
     private driver: WebDriver;
@@ -22,6 +23,6 @@ export class LoginPage {
         await this.component.waitForDisplayed(this.passwordTxtbox);
         await this.component.setText(this.passwordTxtbox, password);
         await this.component.clickElement(this.loginBtn);
-        await this.driver.sleep(5000);
+        await this.driver.sleep(TIMEFORPAGELOADED); // wait for login to home page
     }
 }

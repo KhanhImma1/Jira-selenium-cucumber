@@ -18,3 +18,18 @@ Feature: Create new isssue
     Examples: 
       | summary       |
       | Best issue #1 |
+
+  @issue2
+  Scenario: [ISS-02] Verify that user can create a new issue
+    Given User is on work page
+    When User clicks on "Create" button on header bar
+    Then "Create issue" popup is opened
+    When User enters summary data as "<summary>"
+    When User selects issue type option as "<issue_type>" from Issue type dropdown list
+    Then "<issue_type>" option is displayed on Issue type combobox
+    When User clicks on "Create" button
+    Then A popup with success message "You've created" is displayed
+
+    Examples: 
+      | summary        | issue_type |
+      | Worst issue #2 | Bug        |

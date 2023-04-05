@@ -6,7 +6,6 @@ import { Component } from "../common/component";
 
 let loginPage: LoginPage;
 let component: Component;
-setDefaultTimeout(50 * 1000);
 
 Given(/^User is on login page$/, async () => {
     await driver.get("https://id.atlassian.com/login");

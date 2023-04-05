@@ -8,7 +8,6 @@ import { UpdateIssuePage } from "../page/update_issue.page";
 let newProjectPage: NewProjectPage;
 let component: Component;
 let homePage: UpdateIssuePage;
-setDefaultTimeout(50 * 1000);
 
 Given(/^User is on work page$/, async () => {
     await driver.navigate().to("https://htk-entry-auto.atlassian.net/");

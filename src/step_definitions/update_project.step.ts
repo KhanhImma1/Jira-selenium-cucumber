@@ -64,19 +64,19 @@ Then(/^The "Start Sprint" popup is displayed$/, async () => {
     await component.waitForDisplayed(updateProjectPage.startSprintPopupTitle);
     assert.equal((await driver.findElement(updateProjectPage.startSprintPopupTitle).getText()).toString() ,
                     "Start Sprint",
-                    "The Start Sprint popup is not displayed");
+                    'The "Start Sprint" popup is not displayed');
 })
 
 Then(/^A popup with message "Sprint started" is displayed$/, async () => {
     await component.waitForDisplayed(updateProjectPage.sprintStartedMessage);
     assert.equal((await driver.findElement(updateProjectPage.sprintStartedMessage).getText()).toString() ,
                     "Sprint started",
-                    'The popup with message "Sprint started" is displayed');
+                    'The popup with message "Sprint started" is not displayed');
 })
 
 Then(/^The sprint name \"([^\"]*)\" is displayed on Board page$/, async (sprint_name) => {
     await component.waitForDisplayed(updateProjectPage.sprintNameTitleOnBoard);
     assert.equal((await driver.findElement(updateProjectPage.sprintNameTitleOnBoard).getText()).toString() ,
                     sprint_name,
-                    'The popup with message "Sprint started" is displayed');
+                    'The sprint name is not displayed on Board page');
 })
