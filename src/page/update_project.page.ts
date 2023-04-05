@@ -1,6 +1,5 @@
 import { By, Key, WebDriver, WebElement } from "selenium-webdriver";
 import { Component } from "../common/component";
-import { TIMEFORUNITGENERATED } from "../common/hook"
 
 export class UpdateProjectPage {
     private driver: WebDriver;
@@ -10,6 +9,7 @@ export class UpdateProjectPage {
     private viewAllProjectsOption = By.xpath('//span[text()="View all projects"]');
     private backLogButton = By.css('[data-testid*="backlog-link"]');
     private createSprintButton = By.css('[data-testid*="create-sprint-button"]');
+    private backlogContent = By.css('[data-test-id*="backlog-content"]');
     public readonly startSprintPopupTitle = By.xpath('//span[text()="Start Sprint"]');
     private sprintNameTextbox = By.css('input[name="sprintName"]');
     private durationTextboxClick = By.css('[data-test-id*="sprint-duration"]');
@@ -33,20 +33,16 @@ export class UpdateProjectPage {
     }
 
     public async clickViewAllProjectsOption() {
-        await this.component.waitForDisplayed(this.projectDropdownList);
         await this.component.clickElement(this.projectDropdownList);
-        await this.component.waitForDisplayed(this.viewAllProjectsOption);
         await this.component.clickElement(this.viewAllProjectsOption);
     }
 
     public async clickProjectNameItem(project_name: string) {
-        let projectNameItem = By.xpath(this.projectNameItemSelector.replace("{project_name}" , project_name));
-        await this.component.waitForDisplayed(projectNameItem);
+        let projectNameItem = By.xpath(this.projectNameItemSelector.replace("{project_name}", project_name));
         await this.component.clickElement(projectNameItem);
     }
 
     public async clickBacklogButton() {
-        await this.component.waitForDisplayed(this.backLogButton);
         await this.component.clickElement(this.backLogButton);
     }
 
@@ -54,21 +50,19 @@ export class UpdateProjectPage {
         await this.component.waitForDisplayed(this.createSprintButton);
         await this.component.scrollIntoElementByJavaScript(this.createSprintButton);
         await this.component.clickElement(this.createSprintButton);
-        await this.driver.sleep(TIMEFORUNITGENERATED); // wait for new sprint tag generated
+        await this.component.waitForDisplayed(this.backlogContent);
     }
 
     public async createNewIssueOnNewSprint(issue_summary: string) {
         let backlogTagsArray: Array<WebElement> = await this.driver.findElements(this.backlogTagsList);
         let backlogTagsArray_size: any = (backlogTagsArray.length);
-        let createIssueButtonOfNewSprint = By.xpath(this.createIssueButtonOfNewSprintSelector.replace("{backloglist_size}" , backlogTagsArray_size));
-        let issueSummaryTextboxOfNewSprint = By.xpath(this.issueSummaryTextboxOfNewSprintSelector.replace("{backloglist_size}" , backlogTagsArray_size));
-        let startSprintButtonOfNewSprint = By.xpath(this.startSprintButtonOfNewSprintSelector.replace("{backloglist_size}" , backlogTagsArray_size));
-        await this.component.waitForDisplayed(createIssueButtonOfNewSprint);
+        let createIssueButtonOfNewSprint = By.xpath(this.createIssueButtonOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
+        let issueSummaryTextboxOfNewSprint = By.xpath(this.issueSummaryTextboxOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
+        let startSprintButtonOfNewSprint = By.xpath(this.startSprintButtonOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
         await this.component.clickElement(createIssueButtonOfNewSprint);
         await this.component.waitForDisplayed(issueSummaryTextboxOfNewSprint);
-        await this.component.setText(issueSummaryTextboxOfNewSprint , issue_summary);
+        await this.component.setText(issueSummaryTextboxOfNewSprint, issue_summary);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
-        await this.component.waitForDisplayed(startSprintButtonOfNewSprint);
         await this.component.clickElement(startSprintButtonOfNewSprint);
     }
 
@@ -80,24 +74,21 @@ export class UpdateProjectPage {
     }
 
     public async selectDurationOption(duration: string) {
-        await this.component.waitForDisplayed(this.durationTextboxClick);
         await this.component.clickElement(this.durationTextboxClick);
-        await this.component.setText(this.durationTextboxInput , duration);
+        await this.component.setText(this.durationTextboxInput, duration);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
     }
 
-    public async selectStartDateTimeOption(start_date: string , start_time: string) {
-        await this.component.waitForDisplayed(this.startDateTextboxClick);
+    public async selectStartDateTimeOption(start_date: string, start_time: string) {
         await this.component.clickElement(this.startDateTextboxClick);
-        await this.component.setText(this.startDateTextboxInput , start_date);
+        await this.component.setText(this.startDateTextboxInput, start_date);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
         await this.driver.actions().sendKeys(Key.TAB).perform();
-        await this.component.setText(this.startTimeTextboxInput , start_time);
+        await this.component.setText(this.startTimeTextboxInput, start_time);
         await this.driver.actions().sendKeys(Key.ENTER).perform();
     }
 
     public async clickStartButton() {
-        await this.component.waitForDisplayed(this.startButton);
         await this.component.clickElement(this.startButton);
     }
 }

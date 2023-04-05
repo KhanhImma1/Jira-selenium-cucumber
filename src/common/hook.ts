@@ -2,11 +2,9 @@ import { After, Before } from "@cucumber/cucumber";
 import { Builder, WebDriver } from "selenium-webdriver";
 
 export let driver: WebDriver;
-export const TIMEFORPAGELOADED: number = 5000;
-export const TIMEFORUNITGENERATED: number = 2000;
-export const DEFAULTTIMEOUT: number = 50000;
+export const DEFAULT_TIMEOUT: number = 50000;
 
-Before({timeout: DEFAULTTIMEOUT}, async () => {
+Before({timeout: DEFAULT_TIMEOUT}, async () => {
     driver = await new Builder().forBrowser('chrome').build();
     driver.manage().window().maximize();
 })

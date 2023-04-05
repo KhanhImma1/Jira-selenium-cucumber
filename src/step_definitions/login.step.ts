@@ -1,11 +1,13 @@
-import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber";
+import { setDefaultTimeout, Given, When, Then } from "@cucumber/cucumber";
 import { LoginPage } from "../page/login.page";
-import { driver } from "../common/hook"
+import { DEFAULT_TIMEOUT, driver } from "../common/hook"
 import assert from 'assert';
 import { Component } from "../common/component";
 
 let loginPage: LoginPage;
 let component: Component;
+
+setDefaultTimeout(DEFAULT_TIMEOUT);
 
 Given(/^User is on login page$/, async () => {
     await driver.get("https://id.atlassian.com/login");
@@ -17,8 +19,6 @@ When(/^User logins with email as \"([^\"]*)\" and password as \"([^\"]*)\"$/, as
 })
 
 Then(/^User should navigate to the Home page$/, async () => {
-    component = new Component(driver);
-    await component.waitForDisplayed(loginPage.homepage);
     assert.equal(await driver.findElement(loginPage.homepage).isDisplayed() ,
                         true ,
                         "The Home page is not displayed");

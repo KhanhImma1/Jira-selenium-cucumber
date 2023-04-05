@@ -53,3 +53,20 @@ Feature: Update issue
     Examples: 
       | issue_key | linked_issue_key | link_type     |
       | NP2-2     | NP2-5            | is blocked by |
+
+  @addweblink
+  Scenario: Verify that user can add new web link
+    Given User is on work page
+    When User selects "Go to Your Work page" option from "Your work" dropdown list
+    When User clicks on an issue with issue key as "<issue_key>" on issue list
+    When User clicks on "Add web link" option from dropdown list next to "Link issue" button
+    When User enters valid URL as "<URL>" into URL textbox
+    When User enter description as "<link_text>" into Link text textbox
+    When User clicks on "Link" button on Web links area
+    Then "<link_text>" item is displayed on Web links area
+    When User clicks on "<link_text>" item on Web links area
+    Then New window is opended to navigate to "<URL>"
+
+    Examples: 
+      | issue_key | URL            | link_text |
+      | NP2-15    | map.google.com | GG map    |

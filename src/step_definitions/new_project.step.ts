@@ -1,6 +1,6 @@
 import { Given, Then, When, setDefaultTimeout } from "@cucumber/cucumber";
 import { NewProjectPage } from "../page/new_project.page"
-import { driver } from "../common/hook"
+import { DEFAULT_TIMEOUT , driver } from "../common/hook"
 import assert from "assert"
 import { Component } from "../common/component";
 import { UpdateIssuePage } from "../page/update_issue.page";
@@ -8,6 +8,8 @@ import { UpdateIssuePage } from "../page/update_issue.page";
 let newProjectPage: NewProjectPage;
 let component: Component;
 let homePage: UpdateIssuePage;
+
+setDefaultTimeout(DEFAULT_TIMEOUT);
 
 Given(/^User is on work page$/, async () => {
     await driver.navigate().to("https://htk-entry-auto.atlassian.net/");

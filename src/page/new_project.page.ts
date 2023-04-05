@@ -1,6 +1,5 @@
-import { By, WebDriver } from "selenium-webdriver";
+import { By, WebDriver, until } from "selenium-webdriver";
 import { Component } from "../common/component";
-import { TIMEFORUNITGENERATED } from "../common/hook"
 
 export class NewProjectPage {
     private driver: WebDriver;
@@ -8,19 +7,19 @@ export class NewProjectPage {
 
     private projectDropdownList = By.xpath('//span[text()="Projects"]');
     private creatProjectOption = By.xpath('//span[text()="Create project"]');
-    public readonly softwareDevelopmentTitle = By.xpath('//h3[text()="Software development"]');
+    readonly softwareDevelopmentTitle = By.xpath('//h3[text()="Software development"]');
     private scrumButton = By.css('button[aria-label="Scrum"]');
-    public readonly scrumTitle = By.xpath('//h1[text()="Scrum"]');
+    readonly scrumTitle = By.xpath('//h1[text()="Scrum"]');
     private useTemplateButton = By.xpath('//button[@class="css-ryxqcb"]');
-    public readonly projectTypeTitle = By.xpath('//div[text()="Choose a project type"]');
+    readonly projectTypeTitle = By.xpath('//div[text()="Choose a project type"]');
     private selectTeamButton = By.css('[data-testid*="team"]');
-    public readonly projectDetailsTitle = By.xpath('//h2[text()="Add project details"]');
+    readonly projectDetailsTitle = By.xpath('//h2[text()="Add project details"]');
     private nameTextBox = By.css('input[id*="name"]');
-    private keyTextBox = By.css('input[id*="key"]');
+    private keyTextBox = By.xpath('//input[contains(@id,"key") and string(@value)]');
     private nextButton = By.xpath('//span[text()="Next"]');
-    public readonly successMessage = By.xpath('//span[text()="Jira project successfully created"]');
-    public readonly nameWarningMessage = By.css('[class="km7ygq-3 jejLoQ"]');
-    public readonly keyWarningMessage = By.css('[class="sc-1ao3zfo-13 hdAFoT"]');
+    readonly successMessage = By.xpath('//span[text()="Jira project successfully created"]');
+    readonly nameWarningMessage = By.css('[class="km7ygq-3 jejLoQ"]');
+    readonly keyWarningMessage = By.css('[class="sc-1ao3zfo-13 hdAFoT"]');
 
     constructor(driver: WebDriver) {
         this.driver = driver;
@@ -50,7 +49,7 @@ export class NewProjectPage {
 
     public async submitProject(value: string) {
         await this.component.setText(this.nameTextBox, value);
-        await this.driver.sleep(TIMEFORUNITGENERATED); // wait for key textbox generated
+        await this.component.waitForDisplayed(this.keyTextBox);
         await this.component.clickElement(this.nextButton);
     }
 }

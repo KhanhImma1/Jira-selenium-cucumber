@@ -2,13 +2,13 @@ import { setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { By } from "selenium-webdriver";
 import { UpdateProjectPage } from "../page/update_project.page";
 import { Component } from "../common/component";
-import { driver } from "../common/hook"
+import { DEFAULT_TIMEOUT, driver } from "../common/hook"
 import assert from "assert"
 
 let updateProjectPage: UpdateProjectPage;
 let component: Component;
 
-setDefaultTimeout(50 * 1000);
+setDefaultTimeout(DEFAULT_TIMEOUT);
 
 When(/^User selects "View all projects" option from "Project" dropdown list on header bar$/, async () => {
     updateProjectPage = new UpdateProjectPage(driver);

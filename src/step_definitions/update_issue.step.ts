@@ -1,4 +1,4 @@
-import { setDefaultTimeout, Then, When } from "@cucumber/cucumber";
+import { Then, When } from "@cucumber/cucumber";
 import { By } from "selenium-webdriver";
 import { UpdateIssuePage } from "../page/update_issue.page";
 import { Component } from "../common/component";
@@ -7,8 +7,6 @@ import assert from "assert"
 
 let updateIssuePage: UpdateIssuePage;
 let component: Component;
-
-setDefaultTimeout(50 * 1000);
 
 When(/^User selects "Go to Your Work page" option from "Your work" dropdown list$/, async () => {
     updateIssuePage = new UpdateIssuePage(driver);
