@@ -40,7 +40,7 @@ export class NewIssuePage {
     }
 
     public async selectIssueTypeOption(issue_type: string) {
-        let issueTypeOption = By.xpath(this.issueTypeOptionSelector.replace("{issue_type}", issue_type));
+        const issueTypeOption = By.xpath(this.issueTypeOptionSelector.replace("{issue_type}", issue_type));
         await this.component.clickElement(this.issueTypeCombobox);
         await this.component.waitForDisplayed(this.issueTypeMenu);
         await this.component.clickElement(issueTypeOption);

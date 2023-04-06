@@ -41,7 +41,7 @@ Then(/^A popup with success message "You've created" is displayed$/, async () =>
 
 Then(/^\"([^\"]*)\" option is displayed on Issue type combobox$/, async (issue_type) => {
     component = new Component(driver);
-    let issueTypeOption = By.xpath(newIssuePage.issueTypeOptionSelector.replace("{issue_type}" , issue_type));
+    const issueTypeOption = By.xpath(newIssuePage.issueTypeOptionSelector.replace("{issue_type}" , issue_type));
     await component.waitForDisplayed(issueTypeOption);
     assert.equal((await driver.findElement(issueTypeOption).getText()).toString() ,
                                           issue_type ,

@@ -27,25 +27,25 @@ When(/^User clicks on "Create sprint" button on backlog tag$/, async () => {
     await updateProjectPage.clickCreateSprintButton();
 })
 
-When(/^User creates new issue with issue summary as \"([^\"]*)\" on new sprint and click "Start sprint" button on new sprint tag$/ ,
-async (issue_summary) => {
-    await updateProjectPage.createNewIssueOnNewSprint(issue_summary);
-})
+When(/^User creates new issue with issue summary as \"([^\"]*)\" on new sprint and click "Start sprint" button on new sprint tag$/,
+    async (issue_summary) => {
+        await updateProjectPage.createNewIssueOnNewSprint(issue_summary);
+    })
 
-When(/^User replaces new Sprint name as \"([^\"]*)\" into "Sprint name" textbox on Start Sprint popup$/ ,
-async (sprint_name) => {
-    await updateProjectPage.replaceNewSprintName(sprint_name);
-})
+When(/^User replaces new Sprint name as \"([^\"]*)\" into "Sprint name" textbox on Start Sprint popup$/,
+    async (sprint_name) => {
+        await updateProjectPage.replaceNewSprintName(sprint_name);
+    })
 
-When(/^User selects a duration as \"([^\"]*)\" options from "Duration" dropdown list on Start Sprint popup$/ ,
-async (duration) => {
-    await updateProjectPage.selectDurationOption(duration);
-})
+When(/^User selects a duration as \"([^\"]*)\" options from "Duration" dropdown list on Start Sprint popup$/,
+    async (duration) => {
+        await updateProjectPage.selectDurationOption(duration);
+    })
 
-When(/^User selects a start date as \"([^\"]*)\" and start time as \"([^\"]*)\" from datetime picker on Start Sprint popup$/ ,
-async (start_day , start_time) => {
-    await updateProjectPage.selectStartDateTimeOption(start_day , start_time);
-})
+When(/^User selects a start date as \"([^\"]*)\" and start time as \"([^\"]*)\" from datetime picker on Start Sprint popup$/,
+    async (start_day, start_time) => {
+        await updateProjectPage.selectStartDateTimeOption(start_day, start_time);
+    })
 
 When(/^User clicks on "Start" button on Start Sprint popup$/, async () => {
     await updateProjectPage.clickStartButton();
@@ -53,30 +53,30 @@ When(/^User clicks on "Start" button on Start Sprint popup$/, async () => {
 
 Then(/^User should navigate to \"([^\"]*)\" work page$/, async (project_name) => {
     component = new Component(driver);
-    let projectPageTitle = By.xpath(updateProjectPage.projectPageTitleSelector.replace("{project_name}" , project_name));
+    const projectPageTitle = By.xpath(updateProjectPage.projectPageTitleSelector.replace("{project_name}", project_name));
     await component.waitForDisplayed(projectPageTitle);
-    assert.equal((await driver.findElement(projectPageTitle).getText()).toString() ,
-                    project_name ,
-                    "Incorrect project name title");
+    assert.equal((await driver.findElement(projectPageTitle).getText()).toString(),
+        project_name,
+        "Incorrect project name title");
 })
 
 Then(/^The "Start Sprint" popup is displayed$/, async () => {
     await component.waitForDisplayed(updateProjectPage.startSprintPopupTitle);
-    assert.equal((await driver.findElement(updateProjectPage.startSprintPopupTitle).getText()).toString() ,
-                    "Start Sprint",
-                    'The "Start Sprint" popup is not displayed');
+    assert.equal((await driver.findElement(updateProjectPage.startSprintPopupTitle).getText()).toString(),
+        "Start Sprint",
+        'The "Start Sprint" popup is not displayed');
 })
 
 Then(/^A popup with message "Sprint started" is displayed$/, async () => {
     await component.waitForDisplayed(updateProjectPage.sprintStartedMessage);
-    assert.equal((await driver.findElement(updateProjectPage.sprintStartedMessage).getText()).toString() ,
-                    "Sprint started",
-                    'The popup with message "Sprint started" is not displayed');
+    assert.equal((await driver.findElement(updateProjectPage.sprintStartedMessage).getText()).toString(),
+        "Sprint started",
+        'The popup with message "Sprint started" is not displayed');
 })
 
 Then(/^The sprint name \"([^\"]*)\" is displayed on Board page$/, async (sprint_name) => {
     await component.waitForDisplayed(updateProjectPage.sprintNameTitleOnBoard);
-    assert.equal((await driver.findElement(updateProjectPage.sprintNameTitleOnBoard).getText()).toString() ,
-                    sprint_name,
-                    'The sprint name is not displayed on Board page');
+    assert.equal((await driver.findElement(updateProjectPage.sprintNameTitleOnBoard).getText()).toString(),
+        sprint_name,
+        'The sprint name is not displayed on Board page');
 })

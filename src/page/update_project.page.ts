@@ -10,7 +10,7 @@ export class UpdateProjectPage {
     private backLogButton = By.css('[data-testid*="backlog-link"]');
     private createSprintButton = By.css('[data-testid*="create-sprint-button"]');
     private backlogContent = By.css('[data-test-id*="backlog-content"]');
-    public readonly startSprintPopupTitle = By.xpath('//span[text()="Start Sprint"]');
+    readonly startSprintPopupTitle = By.xpath('//span[text()="Start Sprint"]');
     private sprintNameTextbox = By.css('input[name="sprintName"]');
     private durationTextboxClick = By.css('[data-test-id*="sprint-duration"]');
     private durationTextboxInput = By.css('input[aria-labelledby*="sprintDuration"]');
@@ -18,11 +18,11 @@ export class UpdateProjectPage {
     private startDateTextboxInput = By.css('[data-testid*="startDate"] input[id*="select-startDate"]');
     private startTimeTextboxInput = By.css('[data-testid*="startDate--timepicker"] input[id*="input"]');
     private startButton = By.css('[data-testid*="ui.start-sprint-button"]');
-    public readonly sprintStartedMessage = By.xpath('//span[text()="Sprint started"]');
-    public readonly sprintNameTitleOnBoard = By.css('[data-testid="software-board.header.title.container"] h1');
+    readonly sprintStartedMessage = By.xpath('//span[text()="Sprint started"]');
+    readonly sprintNameTitleOnBoard = By.css('[data-testid="software-board.header.title.container"] h1');
     private backlogTagsList = By.xpath('//div[contains(@data-test-id,"backlog-content")]/div');
     private projectNameItemSelector = '//span[text()="{project_name}"]';
-    public readonly projectPageTitleSelector = '//nav[@aria-label="Breadcrumbs"]//span[text()="{project_name}"]';
+    readonly projectPageTitleSelector = '//nav[@aria-label="Breadcrumbs"]//span[text()="{project_name}"]';
     private createIssueButtonOfNewSprintSelector = '//div[contains(@data-test-id,"backlog-content")]/div[{backloglist_size}-2]//div[text()="Create issue"]';
     private issueSummaryTextboxOfNewSprintSelector = '//div[contains(@data-test-id,"backlog-content")]/div[{backloglist_size}-2]//textarea';
     private startSprintButtonOfNewSprintSelector = '//div[contains(@data-test-id,"backlog-content")]/div[{backloglist_size}-2]//span[text()="Start sprint"]';
@@ -38,7 +38,7 @@ export class UpdateProjectPage {
     }
 
     public async clickProjectNameItem(project_name: string) {
-        let projectNameItem = By.xpath(this.projectNameItemSelector.replace("{project_name}", project_name));
+        const projectNameItem = By.xpath(this.projectNameItemSelector.replace("{project_name}", project_name));
         await this.component.clickElement(projectNameItem);
     }
 
@@ -54,11 +54,11 @@ export class UpdateProjectPage {
     }
 
     public async createNewIssueOnNewSprint(issue_summary: string) {
-        let backlogTagsArray: Array<WebElement> = await this.driver.findElements(this.backlogTagsList);
-        let backlogTagsArray_size: any = (backlogTagsArray.length);
-        let createIssueButtonOfNewSprint = By.xpath(this.createIssueButtonOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
-        let issueSummaryTextboxOfNewSprint = By.xpath(this.issueSummaryTextboxOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
-        let startSprintButtonOfNewSprint = By.xpath(this.startSprintButtonOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
+        const backlogTagsArray: Array<WebElement> = await this.driver.findElements(this.backlogTagsList);
+        const backlogTagsArray_size: any = (backlogTagsArray.length);
+        const createIssueButtonOfNewSprint = By.xpath(this.createIssueButtonOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
+        const issueSummaryTextboxOfNewSprint = By.xpath(this.issueSummaryTextboxOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
+        const startSprintButtonOfNewSprint = By.xpath(this.startSprintButtonOfNewSprintSelector.replace("{backloglist_size}", backlogTagsArray_size));
         await this.component.clickElement(createIssueButtonOfNewSprint);
         await this.component.waitForDisplayed(issueSummaryTextboxOfNewSprint);
         await this.component.setText(issueSummaryTextboxOfNewSprint, issue_summary);

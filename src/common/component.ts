@@ -1,4 +1,5 @@
 import { By, until, WebDriver } from "selenium-webdriver";
+import { WAIT_FOR_ELEMENT_TIMEOUT } from "../common/hook"
 
 export class Component {
     private driver: WebDriver;
@@ -8,13 +9,13 @@ export class Component {
     }
 
     public async waitForLocated(locator: By) {
-        await this.driver.wait(until.elementLocated(locator), 20 * 1000);
+        await this.driver.wait(until.elementLocated(locator), WAIT_FOR_ELEMENT_TIMEOUT);
     }
 
     public async waitForDisplayed(locator: By) {
         await this.waitForLocated(locator);
         let element = this.driver.findElement(locator);
-        return await this.driver.wait(until.elementIsVisible(element), 20 * 1000);
+        return await this.driver.wait(until.elementIsVisible(element), WAIT_FOR_ELEMENT_TIMEOUT);
     }
 
     public async getTextReady(locator: By) {
