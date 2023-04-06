@@ -47,8 +47,8 @@ When(/^User clicks on "Add web link" option from dropdown list next to "Link iss
     await updateIssuePage.clickAddWebLink();
 })
 
-When(/^User enters valid URL as \"([^\"]*)\" into URL textbox$/, async (URL) => {
-    await updateIssuePage.setURL(URL);
+When(/^User enters valid URL as \"([^\"]*)\" into URL textbox$/, async (url) => {
+    await updateIssuePage.setURL(url);
 })
 
 When(/^User enter link description as \"([^\"]*)\" into Link description textbox$/, async (link_description) => {
@@ -66,20 +66,19 @@ When(/^User clicks on \"([^\"]*)\" item on Web links area$/, async (link_descrip
 Then(/^User should navigate to \"([^\"]*)\" issue's detail page$/, async (issueKey) => {
     component = new Component(driver);
     const issueKeyTitle = By.xpath(updateIssuePage.issueKeyTitleSelector.replace("{issue_key}", issueKey));
-    await component.waitForDisplayed(issueKeyTitle);
-    assert.equal((await driver.findElement(issueKeyTitle).getText()).toString(),
+    assert.equal((await component.getReadyText(issueKeyTitle)).toString(),
         issueKey,
         "Incorrect issue title");
 })
 
 Then(/^New summary \"([^\"]*)\" is displayed on summary title$/, async (new_summary) => {
-    assert.equal((await driver.findElement(updateIssuePage.summaryTitle).getText()).toString(),
+    assert.equal((await component.getReadyText(updateIssuePage.summaryTitle)).toString(),
         new_summary,
         "Incorrect new summary title");
 })
 
 Then(/^New description \"([^\"]*)\" is displayed on description title$/, async (new_description) => {
-    assert.equal((await driver.findElement(updateIssuePage.descriptionTextTitle).getText()).toString(),
+    assert.equal((await component.getReadyText(updateIssuePage.descriptionTextTitle)).toString(),
         new_description,
         "Incorrect new description title");
 })
@@ -88,14 +87,12 @@ Then(/^The linked issue with issue_key as \"([^\"]*)\" is displayed on link type
 async (linked_issue_key, link_type) => {
     const linkTypeGroupLabel = By.xpath(updateIssuePage.linkTypeGroupLabelSelector.replace("{link_type}", link_type));
     const linkedIssueKeyInGroup = By.xpath(updateIssuePage.linkedIssueKeyInGroupSelector.replace("{linked_issue_key}", linked_issue_key)
-            .replace("{link_type}", link_type));
+                                                                                         .replace("{link_type}", link_type));
     component = new Component(driver);
-    await component.waitForDisplayed(linkTypeGroupLabel);
-    await component.waitForDisplayed(linkedIssueKeyInGroup);
-    assert.equal((await driver.findElement(linkTypeGroupLabel).getText()).toString(),
+    assert.equal((await component.getReadyText(linkTypeGroupLabel)).toString(),
         link_type,
         "It's not link type added");
-    assert.equal((await driver.findElement(linkedIssueKeyInGroup).getText()).toString(),
+    assert.equal((await component.getReadyText(linkedIssueKeyInGroup)).toString(),
         linked_issue_key,
         "It's not linked issue key added");
 })
@@ -103,8 +100,7 @@ async (linked_issue_key, link_type) => {
 Then(/^\"([^\"]*)\" item title is displayed on Web links area$/, async (link_description) => {
     const webLinkItemTitle = By.xpath(updateIssuePage.webLinkItemTitleSelector.replace("{link_description}", link_description));
     component = new Component(driver);
-    await component.waitForDisplayed(webLinkItemTitle);
-    assert.equal((await driver.findElement(webLinkItemTitle).getText()).toString(),
+    assert.equal((await component.getReadyText(webLinkItemTitle)).toString(),
         link_description,
         "Incorrect link description title");
 })

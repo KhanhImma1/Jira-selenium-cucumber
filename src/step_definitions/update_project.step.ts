@@ -54,29 +54,25 @@ When(/^User clicks on "Start" button on Start Sprint popup$/, async () => {
 Then(/^User should navigate to \"([^\"]*)\" work page$/, async (project_name) => {
     component = new Component(driver);
     const projectPageTitle = By.xpath(updateProjectPage.projectPageTitleSelector.replace("{project_name}", project_name));
-    await component.waitForDisplayed(projectPageTitle);
-    assert.equal((await driver.findElement(projectPageTitle).getText()).toString(),
+    assert.equal((await component.getReadyText(projectPageTitle)).toString(),
         project_name,
         "Incorrect project name title");
 })
 
 Then(/^The "Start Sprint" popup is displayed$/, async () => {
-    await component.waitForDisplayed(updateProjectPage.startSprintPopupTitle);
-    assert.equal((await driver.findElement(updateProjectPage.startSprintPopupTitle).getText()).toString(),
+    assert.equal((await component.getReadyText(updateProjectPage.startSprintPopupTitle)).toString(),
         "Start Sprint",
         'The "Start Sprint" popup is not displayed');
 })
 
 Then(/^A popup with message "Sprint started" is displayed$/, async () => {
-    await component.waitForDisplayed(updateProjectPage.sprintStartedMessage);
-    assert.equal((await driver.findElement(updateProjectPage.sprintStartedMessage).getText()).toString(),
+    assert.equal((await component.getReadyText(updateProjectPage.sprintStartedMessage)).toString(),
         "Sprint started",
         'The popup with message "Sprint started" is not displayed');
 })
 
 Then(/^The sprint name \"([^\"]*)\" is displayed on Board page$/, async (sprint_name) => {
-    await component.waitForDisplayed(updateProjectPage.sprintNameTitleOnBoard);
-    assert.equal((await driver.findElement(updateProjectPage.sprintNameTitleOnBoard).getText()).toString(),
+    assert.equal((await component.getReadyText(updateProjectPage.sprintNameTitleOnBoard)).toString(),
         sprint_name,
         'The sprint name is not displayed on Board page');
 })

@@ -26,15 +26,14 @@ When(/^User clicks on "Create" button$/, async () => {
 })
 
 Then(/^"Create issue" popup is opened$/, async () => {
-    assert.equal((await driver.findElement(newIssuePage.createIssueTitle).getText()).toString(),
+    assert.equal((await component.getReadyText(newIssuePage.createIssueTitle)).toString(),
                                             "Create issue",
                                             "The Create issue popup is not displayed");
 })
 
 Then(/^A popup with success message "You've created" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitForDisplayed(newIssuePage.successPopup);
-    assert.equal(await driver.findElement(newIssuePage.successPopup).isDisplayed(),
+    assert.equal((await component.waitForDisplayed(newIssuePage.successPopup)).isDisplayed(),
                                             true ,
                                             "The Success popup is not displayed");
 })
@@ -42,8 +41,7 @@ Then(/^A popup with success message "You've created" is displayed$/, async () =>
 Then(/^\"([^\"]*)\" option is displayed on Issue type combobox$/, async (issue_type) => {
     component = new Component(driver);
     const issueTypeOption = By.xpath(newIssuePage.issueTypeOptionSelector.replace("{issue_type}" , issue_type));
-    await component.waitForDisplayed(issueTypeOption);
-    assert.equal((await driver.findElement(issueTypeOption).getText()).toString() ,
+    assert.equal((await component.getReadyText(issueTypeOption)).toString() ,
                                           issue_type ,
                                           "The selected option is not displayed on Issue type combobox");
 })

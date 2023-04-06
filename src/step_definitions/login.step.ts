@@ -19,15 +19,14 @@ When(/^User logins with email as \"([^\"]*)\" and password as \"([^\"]*)\"$/, as
 })
 
 Then(/^User should navigate to the Home page$/, async () => {
-    assert.equal(await driver.findElement(loginPage.homepage).isDisplayed() ,
+    assert.equal((await component.waitForDisplayed(loginPage.homepage)).isDisplayed() ,
                         true ,
                         "The Home page is not displayed");
 })
 
 Then(/^Warning message "Incorrect email address or password" is displayed$/, async () => {
     component = new Component(driver);
-    await component.waitForDisplayed(loginPage.passwordWarningMessage);
-    assert.equal(await driver.findElement(loginPage.passwordWarningMessage).isDisplayed() , 
+    assert.equal((await component.waitForDisplayed(loginPage.passwordWarningMessage)).isDisplayed() , 
                         true ,
                         'The warning message "Incorrect email address or password" is not displayed');
 })

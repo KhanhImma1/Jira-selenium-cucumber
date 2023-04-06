@@ -8,37 +8,27 @@ export class Component {
         this.driver = driver;
     }
 
-    public async waitForLocated(locator: By) {
-        await this.driver.wait(until.elementLocated(locator), WAIT_FOR_ELEMENT_TIMEOUT);
-    }
-
     public async waitForDisplayed(locator: By) {
-        await this.waitForLocated(locator);
-        let element = this.driver.findElement(locator);
-        return await this.driver.wait(until.elementIsVisible(element), WAIT_FOR_ELEMENT_TIMEOUT);
-    }
-
-    public async getTextReady(locator: By) {
-        await this.waitForLocated(locator);
-        await this.driver.findElement(locator).getText();
+        await this.driver.wait(until.elementLocated(locator), WAIT_FOR_ELEMENT_TIMEOUT , 'Element is not located');
+        const element = await this.driver.findElement(locator);
+        return await this.driver.wait(until.elementIsVisible(element), WAIT_FOR_ELEMENT_TIMEOUT , 'Element is not visible');
     }
 
     public async clickElement(locator: By) {
-        let element = await this.waitForDisplayed(locator);
-        if (element) {
-            await element.click();
-        }
+        (await this.waitForDisplayed(locator)).click();
     }
 
     public async setText(locator: By, value: string) {
-        let element = await this.waitForDisplayed(locator);
-        if (element) {
-            await element.sendKeys(value);
-        }
+        (await this.waitForDisplayed(locator)).sendKeys(value);
+    }
+
+    public async getReadyText(locator: By) {
+        return (await this.waitForDisplayed(locator)).getText();
     }
 
     public async scrollIntoElementByJavaScript(locator: By) {
-        let element = await this.driver.findElement(locator);
+        await this.driver.wait(until.elementLocated(locator), WAIT_FOR_ELEMENT_TIMEOUT , 'Element is not located');
+        const element = await this.driver.findElement(locator);
         await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 }

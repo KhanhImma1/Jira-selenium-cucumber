@@ -72,7 +72,7 @@ Feature: Update issue
     When User selects "Go to Your Work page" option from "Your work" dropdown list
     When User clicks on an issue with issue key as "<issue_key>" on issue list
     When User clicks on "Add web link" option from dropdown list next to "Link issue" button
-    When User enters valid URL as "<URL>" into URL textbox
+    When User enters valid URL as "<url>" into URL textbox
     When User enter link description as "<link_description>" into Link description textbox
     When User clicks on "Link" button on Web links area
     Then "<link_description>" item title is displayed on Web links area
@@ -80,5 +80,5 @@ Feature: Update issue
     Then New window is opended to navigate to web with title "<web_title>"
 
     Examples: 
-      | issue_key | URL            | link_description | web_title   |
+      | issue_key | url            | link_description | web_title   |
       | NP2-15    | map.google.com | GG map           | Google Maps |

@@ -24,7 +24,6 @@ export class UpdateIssuePage {
     private urlTextbox = By.css('input[data-testid*="fields.url"]');
     private linkDescriptionTextbox = By.css('input[data-testid*="fields.text"]');
     private linkWebButton = By.css('button[data-testid*="link.submit"]');
-    readonly webLinkItemField = By.css('//div[contains(@data-testid,"web-links")]/div[2]');
     readonly webLinkItemTitleSelector = '//a[@data-testid="smart-element-link" and text()="{link_description}"]'
     private issueKeyItemSelector = '//small/span[text()="{issue_key}"]';
     readonly issueKeyTitleSelector = '//div[@id="jira-issue-header"]//span[text()="{issue_key}"]';
@@ -91,9 +90,9 @@ export class UpdateIssuePage {
         await this.component.clickElement(this.addWebLinkButton);
     }
 
-    public async setURL(URL: string) {
+    public async setURL(url: string) {
         await this.component.clickElement(this.urlTextbox);
-        await this.component.setText(this.urlTextbox, URL);
+        await this.component.setText(this.urlTextbox, url);
     }
 
     public async setLinkDescription(link_description: string) {
