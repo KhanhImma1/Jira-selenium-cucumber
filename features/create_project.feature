@@ -4,7 +4,7 @@ Feature: Create new project
     Given User is on login page
     When User logins with email as "khanh.t.hoang@evizi.com" and password as "khanh123"
 
-  @project1 @positive
+  @createproject
   Scenario: [PRO-01] Verify that user can create a new "Scum" template project
     Given User is on work page
     When User selects "Create Project" option from "Project" dropdown list on header bar
@@ -17,12 +17,14 @@ Feature: Create new project
     Then "Add project details" page title is displayed
     When User creates new project with project name as "<project_name>"
     Then A popup containing message "Jira project successfully created" is displayed
+    When User view project's details
+    When User deletes project "<project_name>" which has just created
 
     Examples: 
-      | project_name   |
-      | Good project 1 |
+      | project_name         |
+      | Final Exam project 1 |
 
-  @project @negative
+  @project2 @negative
   Scenario: [PRO-01] Verify that user cannot create a new "Scrum" template project with empty project name and empty project key
     Given User is on work page
     When User selects "Create Project" option from "Project" dropdown list on header bar

@@ -23,6 +23,10 @@ When(/^User selects "Create Project" option from "Project" dropdown list on head
     await newProjectPage.clickCreateProjectOption();
 })
 
+When(/^Users click on "Kanban" option$/, async () => {
+    await newProjectPage.clickKanbanOption();
+})
+
 When(/^Users click on "Scrum" option$/, async () => {
     await newProjectPage.clickScrumButton();
 })
@@ -44,10 +48,24 @@ When(/^User creates new project with empty project name and empty project key$/,
     await newProjectPage.submitProject('');
 })
 
+When(/^User view project's details$/, async () => {
+    await newProjectPage.viewProjectDetail();
+})
+
+When(/^User deletes project \"([^\"]*)\" which has just created$/, async (project_name) => {
+    await newProjectPage.deleteProject(project_name);
+})
+
 Then(/^"Software development" page title is displayed$/, async () => {
     assert.equal((await component.getReadyText(newProjectPage.softwareDevelopmentTitle)).toString(),
         "Software development",
         "The Software development page is not displayed");
+})
+
+Then(/^"Kanban" page title is displayed$/, async () => {
+    assert.equal((await component.getReadyText(newProjectPage.kanbanPageTitle)).toString(),
+        "Kanban",
+        "The Kanban page is not displayed")
 })
 
 Then(/^"Scrum" page title is displayed$/, async () => {

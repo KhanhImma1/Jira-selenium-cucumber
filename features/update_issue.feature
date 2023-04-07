@@ -4,6 +4,17 @@ Feature: Update issue
     Given User is on login page
     When User logins with email as "khanh.t.hoang@evizi.com" and password as "khanh123"
 
+  @replaceissuesummary
+  Scenario: [ISS-04] Verify that user can replace issue's summary
+    Given User creates a new issue with type "<issue_type>" and summary "<issue_summary>" and view that issue's detail
+    When User replaces summary with "<new_summary>" into summary textbox
+    Then New summary "<new_summary>" is displayed on summary title
+    When User deletes issue which has just created
+
+    Examples: 
+      | issue_type | issue_summary    | new_summary                   |
+      | Task       | First summary #1 | Replace final exam summary #1 |
+
   @viewissue
   Scenario: [ISS-03] Verify that user can view an issue's detail
     Given User is on work page

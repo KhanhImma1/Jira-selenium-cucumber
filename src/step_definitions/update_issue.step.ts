@@ -1,4 +1,4 @@
-import { setDefaultTimeout, Then, When } from "@cucumber/cucumber";
+import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { By } from "selenium-webdriver";
 import { UpdateIssuePage } from "../page/update_issue.page";
 import { Component } from "../common/component";
@@ -20,6 +20,7 @@ When(/^User clicks on an issue with issue key as \"([^\"]*)\" on issue list$/, a
 })
 
 When(/^User replaces summary with \"([^\"]*)\" into summary textbox$/, async (new_summary) => {
+    updateIssuePage = new UpdateIssuePage(driver);
     await updateIssuePage.replaceIssueSummary(new_summary);
 })
 
@@ -72,6 +73,7 @@ Then(/^User should navigate to \"([^\"]*)\" issue's detail page$/, async (issueK
 })
 
 Then(/^New summary \"([^\"]*)\" is displayed on summary title$/, async (new_summary) => {
+    component = new Component(driver);
     assert.equal((await component.getReadyText(updateIssuePage.summaryTitle)).toString(),
         new_summary,
         "Incorrect new summary title");

@@ -10,6 +10,6 @@ Before({timeout: DEFAULT_TIMEOUT}, async () => {
     driver.manage().window().maximize();
 })
 
-// After(async () => {
-//     await driver.quit();
-// })
+After(async () => {
+    await driver.quit();
+})

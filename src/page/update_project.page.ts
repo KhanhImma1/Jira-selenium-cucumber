@@ -5,7 +5,8 @@ export class UpdateProjectPage {
     private driver: WebDriver;
     private component: Component;
 
-    private projectDropdownList = By.xpath('//span[text()="Projects"]');
+    private projectDetailContent = By.css('#ak-main-content>[data-test-id*="software-board.board"]');
+    private projectDropdownList = By.xpath('//nav//button//span[text()="Projects"]');
     private viewAllProjectsOption = By.xpath('//span[text()="View all projects"]');
     private backLogButton = By.css('[data-testid*="backlog-link"]');
     private createSprintButton = By.css('[data-testid*="create-sprint-button"]');
@@ -33,6 +34,7 @@ export class UpdateProjectPage {
     }
 
     public async clickViewAllProjectsOption() {
+        await this.component.waitForDisplayed(this.projectDetailContent);
         await this.component.clickElement(this.projectDropdownList);
         await this.component.clickElement(this.viewAllProjectsOption);
     }
